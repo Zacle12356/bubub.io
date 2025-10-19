@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Starter Template — HTML · CSS · JS</title>
+  <meta name="description" content="A minimal, responsive starter template with header, hero, cards, modal and theme toggle." />
+
+  <style>
+    /* =========== Reset & base =========== */
+    :root{
+      --bg: #0f172a;
+      --card: #0b1220;
+      --muted: #94a3b8;
+      --accent: #7c3aed;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 12px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg),#071028);
+      color:#e6eef8;
+      line-height:1.45;
+      -webkit-font-smoothing:antialiased;
+      padding:24px;
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* =========== Layout =========== */
+    .container{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:700}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{padding:8px 12px;border-radius:8px}
+    nav a:hover{background:var(--glass)}
+
+    /* mobile menu */
+    .hamburger{display:none;border:0;background:transparent;padding:8px}
+    .actions{display:flex;gap:8px;align-items:center}
+
+    /* =========== Hero =========== */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start;margin-bottom:22px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:20px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(2,6,23,0.6);}
+    .hero-left h1{font-size:clamp(24px,3.2vw,36px);margin:0 0 10px}
+    .hero-left p{color:var(--muted);margin:0 0 16px}
+    .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#5b21b6);color:white;font-weight:600}
+
+    /* =========== Grid cards =========== */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
+    .small{font-size:14px;color:var(--muted)}
+
+    /* =========== Modal =========== */
+    .modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,6,23,0.6);padding:24px}
+    .modal{background:linear-gradient(180deg,#071028,#061226);padding:18px;border-radius:14px;max-width:520px;width:100%}
+
+    /* =========== Footer =========== */
+    footer{margin-top:28px;color:var(--muted);font-size:13px}
+
+    /* =========== Responsive =========== */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .hamburger{display:block}
+      nav{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">ST</div>
+        <div>
+          <div style="font-weight:700">Starter</div>
+          <div style="font-size:12px;color:var(--muted)">HTML · CSS · JS</div>
+        </div>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#examples">Examples</a>
+        <a href="#about">About</a>
+      </nav>
+
+      <div class="actions">
+        <button class="btn" id="openModal">Get Started</button>
+        <button class="hamburger" id="toggleNav" aria-label="Toggle menu">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="card hero-left">
+          <h1>Clean starter template for web projects</h1>
+          <p class="small">A single-file proof-of-concept: responsive layout, accessible modal, lightweight JS utilities and a theme toggle you can expand.</p>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+            <a class="btn" href="#examples">Explore</a>
+            <button class="btn" id="themeToggle" style="background:transparent;border:1px solid rgba(255,255,255,0.06);">Toggle Theme</button>
+          </div>
+
+          <div class="grid" style="margin-top:18px">
+            <div class="card small">⚡ Fast baseline
+              <div style="margin-top:8px;color:var(--muted);font-size:13px">No build step required — just edit and go.</div>
+            </div>
+            <div class="card small">🔒 Accessible
+              <div style="margin-top:8px;color:var(--muted);font-size:13px">Keyboard-friendly modal and sensible semantics.</div>
+            </div>
+            <div class="card small">🎨 Customizable
+              <div style="margin-top:8px;color:var(--muted);font-size:13px">Variables make theme changes simple.</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card">
+          <h3 style="margin-top:0;margin-bottom:8px">Quick example</h3>
+          <p class="small">A tiny interactive counter to show how vanilla JS wires up to the UI.</p>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:12px">
+            <button id="dec">-</button>
+            <div id="count" style="min-width:38px;text-align:center">0</div>
+            <button id="inc">+</button>
+          </div>
+
+          <hr style="margin:14px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)" />
+          <details>
+            <summary style="cursor:pointer">Example HTML</summary>
+            <pre style="white-space:pre-wrap;margin-top:10px;font-size:13px;color:var(--muted)">&lt;button id="inc"&gt;+&lt;/button&gt;</pre>
+          </details>
+        </aside>
+      </section>
+
+      <section id="examples">
+        <h2 style="margin-bottom:10px">Example layout</h2>
+        <div class="grid">
+          <div class="card">Card A — content block. Use this for features, blog posts, or small widgets.</div>
+          <div class="card">Card B — content block. Responsive and modular.</div>
+          <div class="card">Card C — content block. Duplicate as many as you need.</div>
+        </div>
+      </section>
+
+      <!-- modal -->
+      <div class="modal-backdrop" id="backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal" role="document" aria-labelledby="modalTitle">
+          <h3 id="modalTitle">Start your project</h3>
+          <p class="small">Copy this file, rename it, and start building. Example form below demonstrates simple non-blocking validation.</p>
+
+          <form id="demoForm" style="margin-top:12px;display:grid;gap:8px">
+            <label class="small">Project name
+              <input name="proj" type="text" required placeholder="My Project" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" />
+            </label>
+            <div style="display:flex;gap:8px;justify-content:flex-end">
+              <button type="button" id="closeModal" class="small">Cancel</button>
+              <button type="submit" class="btn">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+
+    <footer>
+      Made with ♥ — copy and adapt. • <span style="color:var(--muted)">Version 1.0</span>
+    </footer>
+  </div>
+
+  <script>
+    // Simple JS utilities (no framework needed)
+    const backdrop = document.getElementById('backdrop');
+    const openModalBtn = document.getElementById('openModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const demoForm = document.getElementById('demoForm');
+
+    function openModal(){
+      backdrop.style.display='flex';
+      backdrop.setAttribute('aria-hidden','false');
+      // trap focus (basic)
+      const first = backdrop.querySelector('input, button, [tabindex]');
+      if(first) first.focus();
+    }
+    function closeModal(){
+      backdrop.style.display='none';
+      backdrop.setAttribute('aria-hidden','true');
+      openModalBtn.focus();
+    }
+
+    openModalBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+    demoForm.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      const form = new FormData(demoForm);
+      const name = form.get('proj') || 'Untitled';
+      // a lightweight success UI
+      alert('Project created: '+name);
+      closeModal();
+    });
+
+    // counter example
+    let count = 0;
+    const inc = document.getElementById('inc');
+    const dec = document.getElementById('dec');
+    const countDisplay = document.getElementById('count');
+    inc.addEventListener('click',()=>{ count++; countDisplay.textContent = count; });
+    dec.addEventListener('click',()=>{ count--; countDisplay.textContent = count; });
+
+    // mobile nav toggle
+    const toggleNav = document.getElementById('toggleNav');
+    toggleNav && toggleNav.addEventListener('click',()=>{
+      const nav = document.querySelector('nav');
+      if(nav.style.display==='flex') nav.style.display='none'; else nav.style.display='flex';
+    });
+
+    // theme toggle: quick example switching CSS variables
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click',()=>{
+      const root = document.documentElement;
+      if(root.style.getPropertyValue('--bg')===''){
+        // switch to light theme
+        root.style.setProperty('--bg','#f7fbff');
+        root.style.setProperty('--card','#ffffff');
+        root.style.setProperty('--muted','#475569');
+        root.style.setProperty('--accent','#0ea5a4');
+        document.body.style.color = '#071029';
+      } else {
+        // reset to dark
+        root.style.removeProperty('--bg');
+        root.style.removeProperty('--card');
+        root.style.removeProperty('--muted');
+        root.style.removeProperty('--accent');
+        document.body.style.color = '';
+      }
+    });
+  </script>
+</body>
+</html>
